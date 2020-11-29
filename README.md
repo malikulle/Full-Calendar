@@ -19,7 +19,15 @@
 
 ## When secretary logged in
 ![Secretary1](https://github.com/malikulle/Full-Calendar/blob/master/images/4.png?raw=true)
-![Secretary2](https://github.com/malikulle/Full-Calendar/blob/master/images/5png?raw=true)
+![Secretary2](https://github.com/malikulle/Full-Calendar/blob/master/images/5.png?raw=true)
+
+## Add Apointment Modal
+![AddAppointment](https://github.com/malikulle/Full-Calendar/blob/master/images/7.png?raw=true)
+
+## Edit Apointment Modal
+![EditAppointment](https://github.com/malikulle/Full-Calendar/blob/master/images/8.png?raw=true)
+
 
 ## When Dentist logged in
-![Dentist](https://github.com/malikulle/Full-Calendar/blob/master/images/6png?raw=true)
+![Dentist](https://github.com/malikulle/Full-Calendar/blob/master/images/6.png?raw=true)
+
