@@ -1,0 +1,209 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="lib/fullcalendar/core/main.css" />
+    <link rel="stylesheet" href="lib/fullcalendar/daygrid/main.css" />
+    <link href="~/lib/fullcalendar/timegrid/main.css" rel="stylesheet" />
+    <link href="lib/fullcalendar/bootstrap/main.css" />
+    <link href="lib/fullcalendar/list/main.css" />
+}
+
+<div class="row">
+    <div class="col-md-2">
+        <div id="otherevents">
+            <p>
+                <strong>Sürüklenebilir Etkinlikler</strong>
+            </p>
+            <div class="fc-event">1.Etkinlik</div>
+            <div class="fc-event">2.Etkinlik</div>
+            <div class="fc-event">3.Etkinlik</div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div id="calendar">
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts
+{
+    <script src="lib/fullcalendar/core/main.js"></script>
+    <script src="lib/fullcalendar/daygrid/main.js"></script>
+    <script src="~/lib/fullcalendar/timegrid/main.js"></script>
+    <script src="lib/fullcalendar/core/locales/tr.js"></script>
+    <script src="lib/fullcalendar/bootstrap/main.js"></script>
+    <script src="lib/fullcalendar/list/main.js"></script>
+    <script src="lib/fullcalendar/interaction/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded',
+            function() {
+                var calendarEl = document.getElementById('calendar');
+                var draggableEl = document.getElementById('otherevents');
+
+
+                var Draggable = FullCalendarInteraction.Draggable;
+                new Draggable(draggableEl,
+                    {
+                        itemSelector: ".fc-event",
+                        eventData: function (eventEl) {
+                            return {
+                                title: eventEl.innerText,
+                                duration: "01:30"
+
+                            };
+                        }
+                    });
+
+                var calendar = new FullCalendar.Calendar(calendarEl,
+                    {
+                        plugins: ["interaction", "dayGrid", "timeGrid", 'list', "bootstrap"],
+                        themeSystem: "bootstrap",
+                        bootstrapFontAwesome: {
+                            dayGridMonth: 'calendar',
+                            prev: "fa-chevron-circle-left",
+                            next: "fa-chevron-circle-right",
+                            listWeek: "fa-list"
+                        },
+                        locale: "tr",
+                        header: {
+                            left: 'prev, next, today, addEvent',
+                            center: 'title',
+                            right: 'dayGridMonth, timeGridWeek, timeGridDay, timeGridForFourDay, listWeek'
+                        },
+                        footer: {
+                            left: 'prevYear',
+                            right: 'nextYear'
+                        },
+                        //scrollTime : "08:00:00",
+                        minTime: "08:00:00",
+                        maxTime: "21:00:00",
+                        //slotDuration: '00:15:00',
+                        //slotLabelInterval: '00:15:00',
+                        slotLabelFormat: {
+                            hour: "2-digit",
+                            minute: "2-digit"
+                        },
+                        fixedWeekCount: true,
+                        showNonCurrentDates: false,
+                        //handleWindowResize: true,
+                        //windowResizeDelay: 1000,
+                        //windowResize: function (view) {
+                        //},
+                        contentHeight: 650,
+                        allDaySlot: false,
+                        //firstDay : 0,
+                        defaultView: 'dayGridMonth',
+                        weekends: true,
+                        titleFormat: {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric"
+                        },
+                        titleRangeSeparator: " / ",
+                        columnHeaderFormat: {
+                            //month: "numeric",
+                            weekday: "long",
+                            //day : "numeric"
+                        },
+                        views: {
+                            timeGridForFourDay: {
+                                type: "timeGrid",
+                                //dayCount: 4,
+                                duration: { days: 4 },
+                                buttonText: "4 Gün"
+                            }
+                        },
+                        customButtons: {
+                            addEvent: {
+                                text: "Ekle",
+                                click: function() {
+                                    var newEvent = {
+                                        id: "a",
+                                        title: "New Event",
+                                        start: "2020-11-28T15:00:00.000Z",
+                                        end: "2020-11-28T18:30:00.000Z"
+                                    }
+                                    calendar.addEvent(newEvent);
+                                }
+                            }
+                        },
+                        //eventColor : "orange",
+                        eventTimeFormat: {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        },
+                        timeZone: "UTC",
+                        events: [
+                            {
+                                id: "x",
+                                title: "Merhaba",
+                                start: "2020-11-28T08:00:00.000Z",
+                                end: "2020-11-28T10:30:00.000Z"
+                            },
+                            {
+                                id: "y",
+                                title: "Merhaba Y",
+                                start: "2020-11-28T11:00:00.000Z",
+                                end: "2020-11-28T12:30:00.000Z"
+                            }
+                        ],
+                        eventRender: function(info) {
+
+                        },
+                        selectable: true,
+                        droppable : true,
+                        select: function(selectionInfo) {
+                            console.log(selectionInfo);
+                        },
+                        eventClick: function(info) {
+                            alert(info.event.title);
+                        },
+                        eventMousseEnter: function(onMouse) {
+                            //alert(onMouse.event.start);
+
+                        },
+                        eventMouseLeave: function(onLeave) {
+                            //alert(onLeave.event.id);
+
+                        },
+                        editable: true,
+                        snapDuration: "00:15:00",
+                        eventDragStart: function(info) {
+                            console.log(info);
+                        },
+                        eventDragStop: function(info) {
+                            console.log(info);
+                        },
+                        drop: function(event) {
+
+                        }
+                        //eventOverlap: function(stillEvent, movingEvent) {
+                        //    return stillEvent.allDay && movingEvent.allDay;
+                        //},
+                        //eventConstraint: {
+                        //    startTime: "10:00",
+                        //    endTime: "19:00",
+                        //    daysOfWeek: [1, 2, 3]
+                        //},
+                        //eventAllow: function(dropEvent,draggedEvent) {
+                        //    return false;
+                        //}
+                    });
+
+
+                calendar.render();
+                var events = calendar.getEvents();
+                console.log(events);
+
+                var id = "x";
+
+                var event = calendar.getEventById(id);
+                console.log(event);
+            });
+    </script>
+}
